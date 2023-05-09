@@ -2,6 +2,22 @@
 
 flutterLingPlay，ling 学习flutter，用来测试，玩儿。
 
+visual studio code 开发 1.78.0
+
+```bash 
+flutter --version
+Flutter 3.7.0 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision b06b8b2710 
+Engine • revision b24591ed32
+Tools • Dart 2.19.0 • DevTools 2.20.1
+```
+
+初步计划 2023年5月9日15:56:32
+登录 dio请求
+主页 底部导航栏
+聊天 gpt聊天（API key 加密，不能泄露）
+我的设置
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
