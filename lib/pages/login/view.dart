@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lingplay/dart/core/getx/base_get_view.dart';
+import 'package:lingplay/pages/login/logic.dart';
+import 'package:lingplay/pages/login/state.dart';
 
-class LoginPage extends StatelessWidget {
-  final loginController = Get.put(LoginController());
-
+class LoginPage extends BaseGetView<LoginController, LoginState> {
   @override
-  Widget build(BuildContext context) {
+  Widget buildView() {
     return Scaffold(
       appBar: AppBar(
         title: Text('登录页面'),
@@ -18,41 +19,50 @@ class LoginPage extends StatelessWidget {
             children: [
               // 账号输入框
               TextFormField(
+                controller: state.accountController,
                 decoration: InputDecoration(
                   labelText: '账号',
                 ),
               ),
-              // 密码输入框
+
               TextFormField(
+                controller: state.passWordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: '密码',
                 ),
               ),
-              SizedBox(height: 20.0),
-              // 登录按钮
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('登录'),
+              // 密码输入框
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.login();
+                    },
+                    child: Text('注册'),
+                  ),
+                  SizedBox(width: 60.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.login();
+                    },
+                    child: Text('登录'),
+                  ),
+                ],
               ),
-              SizedBox(height: 10.0),
+
               // 忘记密码按钮
               TextButton(
                 onPressed: () {},
                 child: Text('忘记密码？'),
               ),
-              SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // 同意用户协议复选框
-                  Obx(
-                    () => Checkbox(
-                      value: loginController.isAgree.value,
-                      onChanged: (bool? value) =>
-                          loginController.toggleAgree(value ?? false),
-                    ),
-                  ),
+                  Checkbox(
+                      value: true, onChanged: (bool? value) => {print(11)}),
                   Text('我同意'),
                   // 用户协议链接
                   TextButton(
@@ -61,24 +71,10 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10.0),
-              // 注册按钮
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('注册'),
-              ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class LoginController extends GetxController {
-  RxBool isAgree = false.obs;
-
-  toggleAgree(bool value) {
-    isAgree.value = value;
   }
 }

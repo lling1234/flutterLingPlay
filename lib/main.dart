@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingplay/pages/login/view.dart';
 
+import 'router.dart';
+
 void main() {
+  // 逻辑绑定
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 
@@ -14,7 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      initialRoute: Routers.login,
+      getPages: Routers.getInitRouters(),
+      // home: LoginPage(),
     );
   }
 }
