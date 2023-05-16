@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingplay/pages/chat/view.dart';
 import 'package:lingplay/pages/home/index/index.dart';
-import 'package:lingplay/pages/home/index/index_pageV2ok.dart';
 import 'package:lingplay/pages/setting/view.dart';
 import 'package:lingplay/pages/shop/view.dart';
 import 'package:lingplay/pages/work/view.dart';
@@ -16,7 +15,7 @@ class Home2Binding implements Bindings {
 
 class Home2Controller extends GetxController {
   final List<Widget> pages = [
-    IndexTabPageok(),
+    IndexPage(),
     ChatPage(),
     ShopPage(),
     WorkPage(),
