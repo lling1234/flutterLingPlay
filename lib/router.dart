@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:lingplay/pages/chat/chat_screen.dart';
 import 'package:lingplay/pages/chat/view.dart';
 import 'package:lingplay/pages/home/view.dart';
 import 'package:lingplay/pages/setting/view.dart';
@@ -15,6 +16,7 @@ class Routers {
   static const String login = "/login";
   static const String home = "/home";
   static const String chat = "/chat";
+  static const String chatScreen = "/chatScreen";
   static const String setting = "/setting";
   static const String shop = "/shop";
   static const String work = "/work";
@@ -28,12 +30,17 @@ class Routers {
       ),
       GetPage(
         name: Routers.home,
-        page: () =>  HomePage2(),
+        page: () => HomePage2(),
         binding: Home2Binding(),
       ),
       GetPage(
         name: Routers.chat,
         page: () => ChatPage(),
+        binding: LoginBinding(),
+      ),
+      GetPage(
+        name: Routers.chatScreen,
+        page: () => ChatScreen(),
         binding: LoginBinding(),
       ),
       GetPage(

@@ -57,6 +57,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.5"
+  auto_size_text_pk:
+    dependency: transitive
+    description:
+      name: auto_size_text_pk
+      sha256: ced55de5336fa7f438c1f5a9aa234e25d7a120c1d40d376a7cdc2af28cdb6995
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   auto_start_flutter:
     dependency: "direct main"
     description:
@@ -1554,6 +1562,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
+  velocity_x:
+    dependency: "direct main"
+    description:
+      name: velocity_x
+      sha256: b70a9de038ac2265cba77c030487463a75c66d65da8d4d917dc6834293ff73a3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.6.0"
   vibration:
     dependency: "direct main"
     description:
@@ -1562,6 +1578,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.7.7"
+  vxstate:
+    dependency: transitive
+    description:
+      name: vxstate
+      sha256: ed5a880018191c5cfed8528bd77f2a942b04847168ca12636a306c323d311086
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.0"
   watcher:
     dependency: transitive
     description:

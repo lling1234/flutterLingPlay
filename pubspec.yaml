@@ -143,6 +143,7 @@ dependencies:
   flutter_downloader: ^1.10.2
   #打开文件
   open_file: ^3.2.1
+  velocity_x: ^3.6.0
 
 
 dev_dependencies:
