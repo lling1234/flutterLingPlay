@@ -14,7 +14,7 @@ class ChatPage extends StatelessWidget {
               Get.toNamed(Routers.chatScreen);
             },
             text: "GPT3.5",
-            icon: Icon(Icons.facebook),
+            icon: Icon(Icons.chat_sharp),
           ),
         ],
       ),

@@ -16,8 +16,8 @@ class HttpUtil {
   Logger log = Logger("HttpLogger");
   var dio = Dio(BaseOptions(
     baseUrl: Constant.host,
-    connectTimeout: 10000,
-    receiveTimeout: 10000,
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
   ));
 
   void init() {
@@ -86,7 +86,8 @@ class HttpUtil {
   }
 
   Future<dynamic> post(
-    String path, accountPwdData, {
+    String path,
+    accountPwdData, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,

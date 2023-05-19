@@ -193,6 +193,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.1"
+  chat_gpt_sdk:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "6d740a475ea6b316a9049de10ef9504f92fe1b94"
+      url: "git@github.com:lling1234/chat_gpt_sdk.git"
+    source: git
+    version: "2.1.3"
   checked_yaml:
     dependency: transitive
     description:
@@ -317,10 +326,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
+      sha256: "347d56c26d63519552ef9a569f2a593dda99a81fdbdff13c584b7197cfe05059"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.0.6"
+    version: "5.1.2"
   dotted_border:
     dependency: "direct main"
     description:
@@ -502,6 +511,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.1"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: d9283d92059a22e9834bc0a31336658ffba77089fb6f3cc36751f1fc7c6661a3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.0.2"
   flutter_downloader:
     dependency: "direct main"
     description:
@@ -1145,10 +1162,10 @@ packages:
     dependency: "direct main"
     description:
       name: pretty_dio_logger
-      sha256: "948f7eeb36e7aa0760b51c1a8e3331d4b21e36fabd39efca81f585ed93893544"
+      sha256: "00b80053063935cf9a6190da344c5373b9d0e92da4c944c878ff2fbef0ef6dc2"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.2.0-beta-1"
+    version: "1.3.1"
   process:
     dependency: transitive
     description:

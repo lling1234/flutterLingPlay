@@ -1,6 +1,8 @@
-import 'dart:async';
+import 'dart:convert';
 
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'chat_message.dart';
@@ -16,28 +18,49 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final List<ChatMessage> _messages = [];
+  late OpenAI? chatGPT;
 
-  StreamSubscription? _subscription;
+  bool _isImageSearch = false;
   bool _isTyping = false;
+
+  var apiKey = "apiKey";
+
+  void loadApiKey() async {
+    String data = await rootBundle.loadString('assets/apiKey.json');
+    final jsonResult = json.decode(data);
+    setState(() {
+      apiKey = (jsonResult['apiKey']);
+    });
+    chatGPT = OpenAI.instance.build(
+        token: apiKey.toString(),
+        baseOption: HttpSetup(
+          sendTimeout: const Duration(seconds: 60),
+          connectTimeout: const Duration(seconds: 60),
+          receiveTimeout: const Duration(seconds: 60),
+        ),
+        enableLog: true);
+  }
 
   @override
   void initState() {
     super.initState();
+    loadApiKey();
   }
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    chatGPT?.cancelAIGenerate();
     super.dispose();
   }
 
-  // Link for api - https://beta.openai.com/account/api-keys
-
-  void _sendMessage() {
+  void _sendMessage() async {
+    print("_controller.text");
+    print(_controller.text);
     if (_controller.text.isEmpty) return;
     ChatMessage message = ChatMessage(
       text: _controller.text,
       sender: "user",
+      isImage: false,
     );
 
     setState(() {
@@ -46,6 +69,38 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
     _controller.clear();
+
+    if (_isImageSearch) {
+      final request = GenerateImage(
+        message.text,
+        1,
+      );
+
+      final response = await chatGPT!.generateImage(request);
+      Vx.log(response!.data!.last!.url!);
+      insertNewData(response.data!.last!.url!, isImage: true);
+    } else {
+      final request = CompleteText(
+          prompt: message.text, maxTokens: 4000, model: Model.textDavinci3);
+
+      final response = await chatGPT!.onCompletion(request: request);
+      Vx.log(response!.choices[0]);
+      Vx.log(response!.choices[0].text);
+      insertNewData(response.choices[0].text, isImage: false);
+    }
+  }
+
+  void insertNewData(String response, {bool isImage = false}) {
+    ChatMessage botMessage = ChatMessage(
+      text: response,
+      sender: "bot",
+      isImage: isImage,
+    );
+
+    setState(() {
+      _isTyping = false;
+      _messages.insert(0, botMessage);
+    });
   }
 
   Widget _buildTextComposer() {
@@ -55,8 +110,8 @@ class _ChatScreenState extends State<ChatScreen> {
           child: TextField(
             controller: _controller,
             onSubmitted: (value) => _sendMessage(),
-            decoration:
-                const InputDecoration.collapsed(hintText: "Enter message here"),
+            decoration: const InputDecoration.collapsed(
+                hintText: "Question/description"),
           ),
         ),
         ButtonBar(
@@ -64,9 +119,16 @@ class _ChatScreenState extends State<ChatScreen> {
             IconButton(
               icon: const Icon(Icons.send),
               onPressed: () {
+                _isImageSearch = false;
                 _sendMessage();
               },
             ),
+            // TextButton(
+            //     onPressed: () {
+            //       _isImageSearch = true;
+            //       _sendMessage();
+            //     },
+            //     child: const Text("Generate Image"))
           ],
         ),
       ],
@@ -76,18 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "ChatGPT APP",
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.green,
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        appBar: AppBar(title: const Text("ChatGPT & Dall-E2 Demo")),
         body: SafeArea(
           child: Column(
             children: [
